@@ -42,8 +42,6 @@ public class HashMapUhTest<K, V> {
 
         Assert.assertEquals(expected, actual);
     }
-
-
 }
 
 

@@ -1,12 +1,11 @@
 package com.codedifferently.collections.hashmapuh;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class HashMapUh<K, V> {
 
     static Logger logger = Logger.getGlobal();
-    // todo implement error throw/catches
-    //
 
     /**
      * field defining default size of map
@@ -88,30 +87,36 @@ public class HashMapUh<K, V> {
      * remove the entry found at the passed key
      * @param key the key to search for
      */
-    public void remove(K key) throws EntryNotFoundException {
+    public void remove(K key) throws NullPointerException {
         logger.info("trying remove operation " + key);
 
         try {
             int index = index(key);
             Entry previous = null;
             Entry entry = table[index];
-            if (entry == null) {
-                throw new EntryNotFoundException();
+            if (entry.equals(null)) {
+                throw new NulPointerException();
             }
+
             while (entry != null) {
                 if (entry.getKey().equals(key)) {
+
                     if (previous == null) {
                         entry = entry.getNext();
                         table[index] = entry;
+                        logger.info("operation successful ");
+
                     } else {
                         previous.setNext(entry.getNext());
                     }
+                } else {
+                    throw new NulPointerException();
                 }
                 previous = entry;
-                entry = entry.getNext();
+                //entry = entry.getNext();
             }
-        } catch (EntryNotFoundException e) {
-            logger.warning("entry not found " + key);
+        } catch (NulPointerException e) {
+            logger.info("entry not found " + key + " " + e.getMessage().toString());
         }
     }
 
@@ -119,16 +124,19 @@ public class HashMapUh<K, V> {
      * use this method to display all
      * entries in the map
      */
-    public void display(){
+    public ArrayList asArrayList(){
+        ArrayList<String> items = new ArrayList();
         for(int i = 0; i < capacity; i++){
             if(table[i] != null){
                 Entry<K, V> currentNode = table[i];
                 while (currentNode != null){
-                    System.out.println(String.format("Key is %s and value is %s", currentNode.getKey(), currentNode.getValue()));
+                    //System.out.println(String.format("Key is %s and value is %s", currentNode.getKey(), currentNode.getValue()));
+                    items.add(currentNode.getValue().toString());
                     currentNode = currentNode.getNext();
                 }
             }
         }
+        return items;
     }
 
     /**

@@ -3,6 +3,8 @@ package com.codedifferently.collections.hashmapuh;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class HashMapUhTest<K, V> {
 
         /* the hashmap instantiation is tested
@@ -39,6 +41,38 @@ public class HashMapUhTest<K, V> {
 
         mapStrStr.put(testKey, expected);
         String actual = mapStrStr.get(testKey);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testRemoveSuccess() throws Exception {
+        String testKey = "testKey";
+        String testValue = "testValue";
+
+        mapStrStr.put(testKey, testValue);
+        mapStrStr.remove(testKey);
+
+        Assert.assertNull(mapStrStr.get(testKey));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testRemoveException()  throws NulPointerException {
+
+        // remove a key that does not exist
+        mapIntStr.remove(1);
+    }
+
+    @Test
+    public void testArrayist() throws Exception {
+        ArrayList<String> items = new ArrayList();
+        String expected = "mouse";
+
+        mapStrStr.put("k9", "dog");
+        mapStrStr.put("feline", "cat");
+        mapStrStr.put("rodent", "mouse");
+        items = mapStrStr.asArrayList();
+        String actual = items.get(2);
 
         Assert.assertEquals(expected, actual);
     }

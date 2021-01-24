@@ -1,23 +1,18 @@
 package com.codedifferently.collections.hashmapuh;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class HashMapUhTest<K, V> {
 
-    /* the hashmap instantiation is tested
- inherently by instantiation for other tests
- */
+        /* the hashmap instantiation is tested
+        inherently by instantiation for other tests
+        */
     HashMapUh<Integer, String> mapIntStr = new HashMapUh<>(32);
     HashMapUh<String, String> mapStrStr = new HashMapUh<>(32);
 
-    @Before
-    public void setUp() {
-    }
-
     @Test
-    public void testGetByKey() {
+    public void testGetByKey() throws Exception {
         Integer testKey = 5;
         String expected = "testValue";
 
@@ -28,7 +23,7 @@ public class HashMapUhTest<K, V> {
     }
 
     @Test // test put() with <int, string>
-    public void testPut( ) {
+    public void testPut( ) throws Exception {
         String expected = "textValue";
 
         mapIntStr.put(1, expected);
@@ -38,7 +33,7 @@ public class HashMapUhTest<K, V> {
     }
 
     @Test // test put() with <string, string>
-    public void testPut2() {
+    public void testPut2() throws Exception {
         String testKey = "testKey";
         String expected = "testValue";
 
@@ -47,4 +42,8 @@ public class HashMapUhTest<K, V> {
 
         Assert.assertEquals(expected, actual);
     }
+
+
 }
+
+

@@ -1,7 +1,10 @@
 package com.codedifferently.collections.hashmapuh;
 
+import java.util.logging.Logger;
+
 public class HashMapUh<K, V> {
 
+    static Logger logger = Logger.getGlobal();
     // todo implement error throw/catches
     //
 
@@ -32,26 +35,31 @@ public class HashMapUh<K, V> {
      * @param key the map key of key:value
      * @param value the value of key:value
      */
-    public void put(K key, V value){
+    public void put(K key, V value) throws Exception {
         // todo implement a check of size vs capacity
         // and a method for scaling up when outgrown
-        int index = index(key);
-        Entry newEntry = new Entry(key, value, null);
-        if(table[index] == null){
-            table[index] = newEntry;
-        }else {
-            Entry<K, V> previousNode = null;
-            Entry<K, V> currentNode = table[index];
-            while(currentNode != null){
-                if(currentNode.getKey().equals(key)){
-                    currentNode.setValue(value);
-                    break;
+
+        try {
+            int index = index(key);
+            Entry<K, V> newEntry = new Entry<>(key, value, null);
+            if (table[index] == null) {
+                table[index] = newEntry;
+            } else {
+                Entry<K, V> previousNode = null;
+                Entry<K, V> currentNode = table[index];
+                while (currentNode != null) {
+                    if (currentNode.getKey().equals(key)) {
+                        currentNode.setValue(value);
+                        break;
+                    }
+                    previousNode = currentNode;
+                    currentNode = currentNode.getNext();
                 }
-                previousNode = currentNode;
-                currentNode = currentNode.getNext();
+                if (previousNode != null)
+                    previousNode.setNext(newEntry);
             }
-            if(previousNode != null)
-                previousNode.setNext(newEntry);
+        } catch (Exception e) {
+            System.out.println(e.toString());
         }
     }
 
@@ -80,23 +88,30 @@ public class HashMapUh<K, V> {
      * remove the entry found at the passed key
      * @param key the key to search for
      */
-    public void remove(K key){
-        int index = index(key);
-        Entry previous = null;
-        Entry entry = table[index];
-        while (entry != null){
-            if(entry.getKey().equals(key)){
-                if(previous == null){
-                    entry = entry.getNext();
-                    table[index] = entry;
-                    return;
-                }else {
-                    previous.setNext(entry.getNext());
-                    return;
-                }
+    public void remove(K key) throws EntryNotFoundException {
+        logger.info("trying remove operation " + key);
+
+        try {
+            int index = index(key);
+            Entry previous = null;
+            Entry entry = table[index];
+            if (entry == null) {
+                throw new EntryNotFoundException();
             }
-            previous = entry;
-            entry = entry.getNext();
+            while (entry != null) {
+                if (entry.getKey().equals(key)) {
+                    if (previous == null) {
+                        entry = entry.getNext();
+                        table[index] = entry;
+                    } else {
+                        previous.setNext(entry.getNext());
+                    }
+                }
+                previous = entry;
+                entry = entry.getNext();
+            }
+        } catch (EntryNotFoundException e) {
+            logger.warning("entry not found " + key);
         }
     }
 
@@ -122,7 +137,7 @@ public class HashMapUh<K, V> {
      * passed key
      *
      * @param key the key to hash
-     * @return
+     * @return int representation of hashed index
      */
     private int index(K key){
         if(key == null){

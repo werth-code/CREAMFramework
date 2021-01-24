@@ -27,7 +27,6 @@ public class HashMapUh<K, V> {
         table = new Entry[capacity];
     }
 
-
     /**
      *
      * @param key the map key of key:value

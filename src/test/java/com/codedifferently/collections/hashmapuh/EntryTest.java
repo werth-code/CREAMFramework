@@ -1,9 +1,26 @@
 package com.codedifferently.collections.hashmapuh;
 
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
 public class EntryTest<K, V> {
-    // None of this is staying.
-    // It is a test runner that will be replaced with unit tests
+
+    HashMapUh<Integer, String> map = new HashMapUh<>(32);
+
+    @Before
+    public void setUp() {
+    }
 
     //todo create tests
+    @Test
+    public void testPut( ) {
+        String expected = "textValue";
 
+        map.put(1, expected);
+        String actual = map.get(1);
+
+        Assert.assertEquals(expected, actual);
+    }
 }
+

@@ -1,5 +1,8 @@
 package com.codedifferently.collections.hashmapuh;
 
+import com.codedifferently.collections.hashmapuh.exceptions.EmptyArrayListException;
+import com.codedifferently.collections.hashmapuh.exceptions.MissingElementException;
+
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -95,48 +98,51 @@ public class HashMapUh<K, V> {
             Entry previous = null;
             Entry entry = table[index];
             if (entry.equals(null)) {
-                throw new NulPointerException();
+                throw new MissingElementException();
             }
-
             while (entry != null) {
                 if (entry.getKey().equals(key)) {
-
                     if (previous == null) {
                         entry = entry.getNext();
                         table[index] = entry;
                         logger.info("operation successful ");
-
                     } else {
                         previous.setNext(entry.getNext());
                     }
                 } else {
-                    throw new NulPointerException();
+                    throw new MissingElementException();
                 }
                 previous = entry;
                 //entry = entry.getNext();
             }
-        } catch (NulPointerException e) {
+        } catch (MissingElementException e) {
             logger.info("entry not found " + key + " " + e.getMessage().toString());
         }
     }
 
     /**
-     * use this method to display all
-     * entries in the map
+     * use this method to create ArrayList
+     * from values in map
      */
-    public ArrayList asArrayList(){
+    public ArrayList getValuesAsArrayList() throws EmptyArrayListException {
         ArrayList<String> items = new ArrayList();
+        logger.info("attempting to create ArrayList");
         for(int i = 0; i < capacity; i++){
             if(table[i] != null){
                 Entry<K, V> currentNode = table[i];
                 while (currentNode != null){
-                    //System.out.println(String.format("Key is %s and value is %s", currentNode.getKey(), currentNode.getValue()));
                     items.add(currentNode.getValue().toString());
                     currentNode = currentNode.getNext();
                 }
             }
         }
-        return items;
+        if (items.size() == 0) {
+            logger.info("ArrayList empty. Possibly empty map object");
+            throw new EmptyArrayListException();
+        } else {
+            logger.info("operation successful  - create ArrayList");
+            return items;
+        }
     }
 
     /**

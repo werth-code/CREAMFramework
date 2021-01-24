@@ -1,5 +1,7 @@
 package com.codedifferently.collections.hashmapuh;
 
+import com.codedifferently.collections.hashmapuh.exceptions.EmptyArrayListException;
+import com.codedifferently.collections.hashmapuh.exceptions.MissingElementException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -57,24 +59,29 @@ public class HashMapUhTest<K, V> {
     }
 
     @Test(expected = NullPointerException.class)
-    public void testRemoveException()  throws NulPointerException {
+    public void testRemoveException()  throws MissingElementException {
 
-        // remove a key that does not exist
-        mapIntStr.remove(1);
+        mapIntStr.remove(1); // remove a key that does not exist
     }
 
-    @Test
-    public void testArrayist() throws Exception {
+    @Test // test third element after creating map and asking for array
+    public void testAsArrayist() throws Exception {
         ArrayList<String> items = new ArrayList();
         String expected = "mouse";
 
         mapStrStr.put("k9", "dog");
         mapStrStr.put("feline", "cat");
         mapStrStr.put("rodent", "mouse");
-        items = mapStrStr.asArrayList();
+        items = mapStrStr.getValuesAsArrayList();
         String actual = items.get(2);
 
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test(expected = EmptyArrayListException.class)
+    public void testAsArrayListEmptyArray() throws EmptyArrayListException {
+        HashMapUh<Integer, String> emptyMapIntStr = new HashMapUh<>(32);
+        ArrayList<String> items = emptyMapIntStr.getValuesAsArrayList();
     }
 }
 

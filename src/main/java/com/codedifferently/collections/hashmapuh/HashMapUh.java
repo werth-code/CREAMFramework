@@ -23,18 +23,19 @@ public class HashMapUh<K, V> {
     //todo
     // create a method that takes in a map and capacity
     // to scale the map up in size when outgrown
+
     /**
      * Use this method to create a new Entry[] table of [int capacity] size
+     *
      * @param capacity refers to the size of the table to create
      */
-    public HashMapUh(int capacity){
+    public HashMapUh(int capacity) {
         this.capacity = capacity;
         table = new Entry[capacity];
     }
 
     /**
-     *
-     * @param key the map key of key:value
+     * @param key   the map key of key:value
      * @param value the value of key:value
      */
     public void put(K key, V value) throws Exception {
@@ -66,17 +67,18 @@ public class HashMapUh<K, V> {
     }
 
     /**
-     *  use this method to get the
-     *  value represented by the passed in key
+     * use this method to get the
+     * value represented by the passed in key
+     *
      * @param key the key to search for
      * @return the value associated with the passed key
      */
-    public V get(K key){
+    public V get(K key) {
         V value = null;
         int index = index(key);
         Entry<K, V> entry = table[index];
-        while (entry != null){
-            if(entry.getKey().equals(key)) {
+        while (entry != null) {
+            if (entry.getKey().equals(key)) {
                 value = entry.getValue();
                 break;
             }
@@ -88,35 +90,33 @@ public class HashMapUh<K, V> {
     /**
      * use this method tp
      * remove the entry found at the passed key
+     *
      * @param key the key to search for
      */
-    public void remove(K key) throws NullPointerException {
+    public void remove(K key) throws MissingElementException, NullPointerException {
         logger.info("trying remove operation " + key);
 
-        try {
-            int index = index(key);
-            Entry previous = null;
-            Entry entry = table[index];
-            if (entry.equals(null)) {
+
+        int index = index(key);
+        Entry previous = null;
+        Entry entry = table[index];
+        if (entry == null) {
+            throw new MissingElementException();
+        }
+        while (entry != null) {
+            if (entry.getKey().equals(key)) {
+                if (previous == null) {
+                    entry = entry.getNext();
+                    table[index] = entry;
+                    logger.info("operation successful ");
+                } else {
+                    previous.setNext(entry.getNext());
+                }
+            } else {
                 throw new MissingElementException();
             }
-            while (entry != null) {
-                if (entry.getKey().equals(key)) {
-                    if (previous == null) {
-                        entry = entry.getNext();
-                        table[index] = entry;
-                        logger.info("operation successful ");
-                    } else {
-                        previous.setNext(entry.getNext());
-                    }
-                } else {
-                    throw new MissingElementException();
-                }
-                previous = entry;
-                //entry = entry.getNext();
-            }
-        } catch (MissingElementException e) {
-            logger.info("entry not found " + key + " " + e.getMessage().toString());
+            previous = entry;
+            //entry = entry.getNext();
         }
     }
 
@@ -127,10 +127,10 @@ public class HashMapUh<K, V> {
     public ArrayList getValuesAsArrayList() throws EmptyArrayListException {
         ArrayList<String> items = new ArrayList();
         logger.info("attempting to create ArrayList");
-        for(int i = 0; i < capacity; i++){
-            if(table[i] != null){
+        for (int i = 0; i < capacity; i++) {
+            if (table[i] != null) {
                 Entry<K, V> currentNode = table[i];
-                while (currentNode != null){
+                while (currentNode != null) {
                     items.add(currentNode.getValue().toString());
                     currentNode = currentNode.getNext();
                 }
@@ -153,8 +153,8 @@ public class HashMapUh<K, V> {
      * @param key the key to hash
      * @return int representation of hashed index
      */
-    private int index(K key){
-        if(key == null){
+    private int index(K key) {
+        if (key == null) {
             return 0;
         }
         return Math.abs(key.hashCode() % capacity);

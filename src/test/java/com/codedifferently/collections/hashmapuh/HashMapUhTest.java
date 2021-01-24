@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class HashMapUhTest<K, V> {
 
-        /* the hashmap instantiation is tested
-        inherently by instantiation for other tests
-        */
+    /* the hashmap instantiation is tested
+    inherently by instantiation for other tests
+    */
     HashMapUh<Integer, String> mapIntStr = new HashMapUh<>(32);
     HashMapUh<String, String> mapStrStr = new HashMapUh<>(32);
 
@@ -27,7 +27,7 @@ public class HashMapUhTest<K, V> {
     }
 
     @Test // test put() with <int, string>
-    public void testPut( ) throws Exception {
+    public void testPut() throws Exception {
         String expected = "textValue";
 
         mapIntStr.put(1, expected);
@@ -58,15 +58,14 @@ public class HashMapUhTest<K, V> {
         Assert.assertNull(mapStrStr.get(testKey));
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testRemoveException()  throws MissingElementException {
-
+    @Test(expected = MissingElementException.class)
+    public void testRemoveException2() throws MissingElementException, NullPointerException {
         mapIntStr.remove(1); // remove a key that does not exist
     }
 
     @Test // test third element after creating map and asking for array
     public void testAsArrayist() throws Exception {
-        ArrayList<String> items = new ArrayList();
+        ArrayList<String> items = new ArrayList<>();
         String expected = "mouse";
 
         mapStrStr.put("k9", "dog");

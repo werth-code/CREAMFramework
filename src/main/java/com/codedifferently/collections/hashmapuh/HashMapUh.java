@@ -1,13 +1,11 @@
 package com.codedifferently.collections.hashmapuh;
 
 import com.codedifferently.collections.hashmapuh.exceptions.EmptyArrayListException;
-import com.codedifferently.collections.hashmapuh.exceptions.Exception;
+import com.codedifferently.collections.hashmapuh.exceptions.IncorrectTypeException;
 import com.codedifferently.collections.hashmapuh.exceptions.MissingElementException;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 /**
@@ -89,7 +87,7 @@ public class HashMapUh<K, V> {
      * @param key   the key of key:value
      * @param value the value of key:value
      */
-    public void put(K key, V value) throws Exception {
+    public void put(K key, V value) throws IncorrectTypeException {
         // todo implement a check of size vs capacity
         // and a method for scaling up when outgrown
 

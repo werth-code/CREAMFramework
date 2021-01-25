@@ -1,7 +1,7 @@
 package com.codedifferently.collections.hashmapuh;
 
 import com.codedifferently.collections.hashmapuh.exceptions.EmptyArrayListException;
-import com.codedifferently.collections.hashmapuh.exceptions.Exception;
+import com.codedifferently.collections.hashmapuh.exceptions.IncorrectTypeException;
 import com.codedifferently.collections.hashmapuh.exceptions.MissingElementException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class HashMapUhTest<K, V> {
     }
 
     @Test // test put() with <int, string>
-    public void testPutWithIntStringParams() throws Exception {
+    public void testPutWithIntStringParams() throws IncorrectTypeException {
         String expected = "textValue";
 
         mapIntStr.put(1, expected);
@@ -103,7 +103,7 @@ public class HashMapUhTest<K, V> {
     }
 
     @Test
-    public void testScaleUpSizeDoubles() throws EmptyArrayListException, Exception {
+    public void testScaleUpSizeDoubles() throws EmptyArrayListException, IncorrectTypeException {
         mapStrStr.put("k9", "dog");
         mapStrStr.put("feline", "cat");
         mapStrStr.put("rodent", "mouse");
@@ -117,7 +117,7 @@ public class HashMapUhTest<K, V> {
     }
 
     @Test
-    public void testScaleUpContentRetained() throws EmptyArrayListException, Exception {
+    public void testScaleUpContentRetained() throws EmptyArrayListException, IncorrectTypeException {
         mapStrStr.put("k9", "dog");
         mapStrStr.put("feline", "cat");
         mapStrStr.put("rodent", "mouse");

@@ -35,7 +35,9 @@ public class HashMapUh<K, V> {
     }
 
     /**
-     * @param key   the map key of key:value
+     * use this method to put a key and value
+     * into a hashmapuh
+     * @param key   the key of key:value
      * @param value the value of key:value
      */
     public void put(K key, V value) throws Exception {
@@ -68,7 +70,7 @@ public class HashMapUh<K, V> {
 
     /**
      * use this method to get the
-     * value represented by the passed in key
+     * value associated with the passed in key
      *
      * @param key the key to search for
      * @return the value associated with the passed key

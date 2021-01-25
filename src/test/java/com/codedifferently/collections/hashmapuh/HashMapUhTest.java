@@ -155,6 +155,32 @@ public class HashMapUhTest<K, V> {
 
         Assert.assertNull(test2);
     }
+
+    @Test
+    public void testContainsValueTrue() throws EmptyArrayListException, IncorrectTypeException {
+        mapStrStr.put("k9", "dog");
+        mapStrStr.put("feline", "cat");
+        mapStrStr.put("rodent", "mouse");
+
+        Boolean containsValue = mapStrStr.containsValue("cat");
+
+        Assert.assertTrue(containsValue);
+    }
+
+    @Test
+    public void testContainsValueFalse() throws EmptyArrayListException, IncorrectTypeException {
+        mapStrStr.put("k9", "dog");
+        //mapStrStr.put("feline", "cat");
+        mapStrStr.put("rodent", "mouse");
+
+        Boolean containsValue = mapStrStr.containsValue("cat");
+
+        Assert.assertFalse(containsValue);
+    }
+
+
+
+
     // todo create test to assert
     //  an exception for incorrect type for put()
 }

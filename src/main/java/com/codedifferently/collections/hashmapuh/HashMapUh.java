@@ -203,6 +203,21 @@ public class HashMapUh<K, V> {
     }
 
     /**
+     * conotainsValue() method will
+     * find if the value passed in (String value)
+     * exists and returns the result
+     *
+     * @param value is the passed in value tolook for
+     * @return (Boolean containsValue
+     * @throws EmptyArrayListException
+     */
+    public Boolean containsValue(String value) throws EmptyArrayListException {
+        ArrayList values = new ArrayList(getValuesAsArrayList());
+        Boolean containsValue = values.contains(value);
+        return containsValue;
+    }
+
+    /**
      * use this method to create an index
      * from the hashcode calculated from
      * passed key
@@ -216,4 +231,6 @@ public class HashMapUh<K, V> {
         }
         return Math.abs(key.hashCode() % capacity);
     }
+
+
 }

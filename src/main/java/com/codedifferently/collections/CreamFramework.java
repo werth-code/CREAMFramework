@@ -1,7 +1,12 @@
 package com.codedifferently.collections;
 
+import com.codedifferently.collections.arraylist.AArrayList;
 import com.codedifferently.collections.linkedlist.ALinkedList;
+import com.codedifferently.collections.sortedset.ASortedSet;
 import com.codedifferently.collections.unsortedset.AUnsortedSet;
+
+import java.util.SortedMap;
+import java.util.SortedSet;
 
 public class CreamFramework {
     public static void main(String[] args) throws Exception {
@@ -10,15 +15,13 @@ public class CreamFramework {
 
         ALinkedList<Integer> list = new ALinkedList<>();
         ALinkedList<String> list2 = new ALinkedList<>();
-
         list2.add("Hi");
 
         list.add(1);
         list.add(2);
-        list.add(3);
 
         for(Integer ints : list) {
-            System.out.println(ints);
+            System.out.println("*" + ints);
         }
 
         list.forEach(System.out::println);
@@ -28,7 +31,18 @@ public class CreamFramework {
         AUnsortedSet<String> unsortedSet = new AUnsortedSet<>();
         unsortedSet.add("Hi");
         unsortedSet.add("How Are You Tariq?");
+        unsortedSet.add("HOW ARE YOU");
 
-        unsortedSet.forEach(ele -> System.out.println(ele + "!!!"));
+        System.out.println("***** " + unsortedSet.isEmpty() + " " + unsortedSet.size());
+
+        //// TODO: 1/25/21 ArrayList
+
+        AArrayList<String> arrayList = new AArrayList<>();
+        arrayList.add("Hello");
+        arrayList.add("Goodbye");
+
+        arrayList.forEach(System.out::println);
+
+
     }
 }

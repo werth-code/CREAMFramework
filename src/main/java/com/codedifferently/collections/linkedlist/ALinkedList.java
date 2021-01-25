@@ -52,7 +52,7 @@ public class ALinkedList <T> implements AList<T>, Iterable<T> {
     }
 
     @Override
-    public T get(T data) {                                        // Should retrieve the object being passed in - or null. If no items are present throw an exception
+    public T get(T data) {                                                  // Should retrieve the object being passed in - or null. If no items are present throw an exception
         try {
             if(this.head == null) throw new ListHasNoElementsException();   // If the list has no elements throw our custom exception.
 

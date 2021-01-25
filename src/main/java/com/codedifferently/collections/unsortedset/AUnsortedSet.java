@@ -131,6 +131,18 @@ public class AUnsortedSet<T> implements ASet<T>, Iterable<T> {
     public T[] getBackingArray() {
         return backingArray;
     }
+
+    public void setBackingArray(T[] backingArray) {
+        this.backingArray = backingArray;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
 }
 
 

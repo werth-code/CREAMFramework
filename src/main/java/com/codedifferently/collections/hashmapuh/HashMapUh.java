@@ -5,19 +5,34 @@ import com.codedifferently.collections.hashmapuh.exceptions.Exception;
 import com.codedifferently.collections.hashmapuh.exceptions.MissingElementException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 /**
- * Use this class to create a custom hashmap with two parameters
+ * HashMapUh -
+ * create a custom hashmap with two parameters
+ * instantiate as one of    :
+ * -- HashMapUh(Integer K, String V)     :
+ *     or
+ * -- HashMapUh(String K, String V)      :
+ *     or
+ * -- HashMapUh(String K, Integer V)     :
+ *     or
+ * -- HashMapUh(nteger K, Integer V)     :
+ *
  *
  * @param <K> key for key:val pair
  * @param <V> val for key:val pair
  */
 public class HashMapUh<K, V> {
-
     static Logger logger = Logger.getGlobal();
     private int capacity; //Initial default capacity
     private Entry<K, V>[] table;
+    public Long size() {
+        Long size = Arrays.stream(this.table).count();
+        return size;
+    }
 
     //todo
     // create a method that takes in a map and capacity
@@ -90,7 +105,7 @@ public class HashMapUh<K, V> {
     }
 
     /**
-     * use this method tp
+     * use this method to
      * remove the entry found at the passed key
      *
      * @param key the key to search for
@@ -121,12 +136,13 @@ public class HashMapUh<K, V> {
     }
 
     /**
-     * use this method to create ArrayList
-     * from values in map
+     * create ArrayList from values in HashMapUh
+     *
      */
     public ArrayList getValuesAsArrayList() throws EmptyArrayListException {
         ArrayList<String> items = new ArrayList();
         logger.info("attempting to create ArrayList");
+
         for (int i = 0; i < capacity; i++) {
             if (table[i] != null) {
                 Entry<K, V> currentNode = table[i];

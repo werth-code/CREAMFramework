@@ -87,10 +87,20 @@ public class HashMapUhTest<K, V> {
     @Test
     public void testGetCapacity() {
         Integer expected = 32;
+
         Integer actual = mapStrStr.capacity();
+
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void testSize() {
+        Long expected = Long.valueOf(32);
+
+        Long size = mapStrStr.size();
+
+        Assert.assertEquals(expected, size);
+    }
 }
 
 

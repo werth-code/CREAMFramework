@@ -3,36 +3,59 @@ package com.codedifferently.collections.linkedlist;
 import com.codedifferently.collections.AList;
 import com.codedifferently.collections.linkedlist.exceptions.ListHasNoElementsException;
 
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.Consumer;
 import java.util.logging.Logger;
 
-public class ALinkedList <T> implements AList {
+public class ALinkedList <T> implements AList<T>, Iterable<T> {
     static Logger logger = Logger.getGlobal();
-    private LinkNode head;
-    //this is the first element in our Linked List
+    private LinkNode<T> head;
 
     @Override
-    public Boolean add(Object data) {
-        LinkNode<T> node = new LinkNode(data);                            //Create a new node
-        node.setNextNode(null);                                             //Set the next node to null
-
-        if(this.head == null) this.head = node;                             //if we have no head(its null)then we set our new node as the head.
-        else {
-            LinkNode last = this.head;                                      //set our last element to the head.. traverse the list to get to the end...insert as the last element.
-            while(last.getNextNode() != null) {
-                last = last.getNextNode();
-            }
-            last.setNextNode(node);
-        }
-        return true;
+    public Iterator<T> iterator() {
+        return new ALinkedListIterator<>(this);
     }
 
+    @Override
+    public void forEach(Consumer<? super T> action) {
+        Objects.requireNonNull(action);
+        for (T t : this) action.accept(t);
+    }
 
     @Override
-    public Object get(Object data) {                                        // Should retrieve the object being passed in - or null. If no items are present throw an exception
+    public Spliterator<T> spliterator() {
+        return Spliterators.spliterator(iterator(), size(), Spliterator.ORDERED);
+    }
+
+    static class ALinkedListIterator <T> implements Iterator<T> {
+        LinkNode<T> current;
+
+        public ALinkedListIterator(ALinkedList<T> list) {
+            current = list.getHeadNode();
+        }
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public T next() {
+            T data = current.getData();
+            current = current.getNextNode();
+            return data;
+        }
+    }
+
+    @Override
+    public T get(T data) {                                        // Should retrieve the object being passed in - or null. If no items are present throw an exception
         try {
             if(this.head == null) throw new ListHasNoElementsException();   // If the list has no elements throw our custom exception.
 
-            LinkNode currentNode = this.head;
+            LinkNode<T> currentNode = this.head;
 
             while (currentNode != null) {
                 if (currentNode.getData() == data) return currentNode.getData();
@@ -48,8 +71,8 @@ public class ALinkedList <T> implements AList {
 
     @Override
     public LinkNode<T> remove(Object data) {
-        LinkNode currentNode = this.head;
-        LinkNode previousNode = null;
+        LinkNode<T> currentNode = this.head;
+        LinkNode<T> previousNode = null;
 
         if(currentNode != null && currentNode.getData().equals(data)) {          // If the key is the head node
             this.head = currentNode.getNextNode();
@@ -75,7 +98,7 @@ public class ALinkedList <T> implements AList {
     public Integer size() {                                                             // Count all of our nodes.
         if(this.head == null) return null;
 
-        LinkNode currentNode = head;
+        LinkNode<T> currentNode = head;
         Integer count = 1;
 
         while(currentNode.getNextNode() != null) {
@@ -87,7 +110,7 @@ public class ALinkedList <T> implements AList {
     }
 
     public void printALinkedList() {
-        LinkNode currentNode = this.head;
+        LinkNode<T> currentNode = this.head;
         while(currentNode != null) {
             logger.info(currentNode.getData() + " ");
             currentNode = currentNode.getNextNode();
@@ -122,11 +145,27 @@ public class ALinkedList <T> implements AList {
     }
 
     @Override
-    public Boolean contains(Object data) {
+    public Boolean add(T data) {
+        LinkNode<T> node = new LinkNode<>(data);                            //Create a new node
+        node.setNextNode(null);                                             //Set the next node to null
+
+        if(this.head == null) this.head = node;                             //if we have no head(its null)then we set our new node as the head.
+        else {
+            LinkNode<T> last = this.head;                                      //set our last element to the head.. traverse the list to get to the end...insert as the last element.
+            while(last.getNextNode() != null) {
+                last = last.getNextNode();
+            }
+            last.setNextNode(node);
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean contains(T data) {
         try {
             if(this.head == null) throw new ListHasNoElementsException();   // If the list has no elements throw our custom exception.
 
-            LinkNode currentNode = this.head;
+            LinkNode<T> currentNode = this.head;
 
             while (currentNode != null) {
                 if (currentNode.getData() == data) return true;
@@ -142,5 +181,4 @@ public class ALinkedList <T> implements AList {
     public LinkNode<T> getHeadNode() {
         return head;
     }
-
 }

@@ -71,14 +71,13 @@ public class AUnsortedSet<T> implements ASet<T>, Iterable<T> {
             if (counter == backingArray.length) {
                 T[] newArray = Arrays.copyOf(backingArray, backingArray.length * 2);
                 newArray[counter] = data;
-                counter = counter + 1;
+                counter++;
                 backingArray = newArray;
-                return true;
             } else {
                 backingArray[counter] = data;
-                counter = counter + 1;
-                return true;
+                counter++;
             }
+            return true;
         } catch (NoDataInParameterException e) {
             logger.warning("The Data Parameter Must Not Be Empty.");
         }
@@ -87,45 +86,46 @@ public class AUnsortedSet<T> implements ASet<T>, Iterable<T> {
 
     @Override
     public Boolean contains(T value) {
+        for(T val : this.getBackingArray()) {
+            if(val == value) return true;
+        }
         return false;
     }
 
     @Override
     public Object get(T data) {
+        for(T val : this.getBackingArray()) {
+            if(val == data) return data;
+        }
         return null;
     }
 
-    public boolean equals() {
-
-        String str1 = "Strings are fun";
-        String str2 = "Strings are fun";
-
-        return str1.equals(str2);
-
-    }
     public Boolean remove(T data){
+        for(int i = 0; i < this.getBackingArray().length; i++) {
+            if(data == backingArray[i]) {
+                backingArray[i] = null;
+                return true;
+            }
+        }
         return false;
     }
 
     public Integer size() {
-
-        //loop keep track of count
-        return counter;
-
+        return this.counter;
     }
 
     @Override
     public void clear() {
-
+        this.backingArray = (T[]) new Object[SIZE];
     }
 
     @Override
     public Boolean isEmpty() {
-        return null;
+        return this.counter == 0;
     }
 
-    public Object[] toArray() {
-        return new Object[0];
+    public Object[] toArray() { //// TODO: 1/25/21 this should remove null values
+        return this.getBackingArray();
     }
 
     public T[] getBackingArray() {

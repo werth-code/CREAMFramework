@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 public class ALinkedList <T> implements AList<T>, Iterable<T> {
     static Logger logger = Logger.getGlobal();
     private LinkNode<T> head;
+    private Integer count = 0;
 
     @Override
     public Iterator<T> iterator() {
@@ -77,6 +78,7 @@ public class ALinkedList <T> implements AList<T>, Iterable<T> {
         if(currentNode != null && currentNode.getData().equals(data)) {          // If the key is the head node
             this.head = currentNode.getNextNode();
             logger.info(data + " has been deleted.");
+            count--;
             return currentNode;
         }
 
@@ -88,6 +90,7 @@ public class ALinkedList <T> implements AList<T>, Iterable<T> {
         if(currentNode != null && previousNode != null) {
             previousNode.setNextNode(currentNode.getNextNode());
             logger.info(data + " has been deleted.");
+            count--;
         }
         else logger.info(data + " not found.");
 
@@ -96,17 +99,7 @@ public class ALinkedList <T> implements AList<T>, Iterable<T> {
 
 
     public Integer size() {                                                             // Count all of our nodes.
-        if(this.head == null) return null;
-
-        LinkNode<T> currentNode = head;
-        Integer count = 1;
-
-        while(currentNode.getNextNode() != null) {
-            currentNode = currentNode.getNextNode();
-            count++;
-        }
-        logger.info("Length: " + count);
-        return count;
+        return this.count;
     }
 
     public void printALinkedList() {
@@ -137,11 +130,12 @@ public class ALinkedList <T> implements AList<T>, Iterable<T> {
     @Override
     public void clear() {
         this.head = null;
+        count = 1;
     }
 
     @Override
     public Boolean isEmpty() {
-        return head == null;
+        return count == 1;
     }
 
     @Override
@@ -157,6 +151,7 @@ public class ALinkedList <T> implements AList<T>, Iterable<T> {
             }
             last.setNextNode(node);
         }
+        count++;
         return true;
     }
 

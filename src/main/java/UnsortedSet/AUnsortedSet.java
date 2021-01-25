@@ -23,11 +23,11 @@ public class AUnsortedSet<T> {
 
     public boolean add(T data){
         for(Object element : backingArray){
-            if (element == null || data == null || element.equals(data)) return false;
+            if (data == null || element == data) return false; //TODO:
         }
         if(counter == backingArray.length){
             T[] newArray = Arrays.copyOf(backingArray,backingArray.length * 2);
-            newArray[counter] = data; // TODO: may need +1 numElements
+            newArray[counter] = data;
             counter = counter +1;
             backingArray = newArray;
             return true;
@@ -39,27 +39,15 @@ public class AUnsortedSet<T> {
         }
     }
 
+    public boolean remove(T data){
+        return false;
+    }
+
     //loop through to find value?
     public boolean contains(T value) {
         return false;
     }
 
-    public boolean equals() {
-
-        String str1 = "Strings are fun";
-        String str2 = "Strings are fun";
-
-
-        if (str1.equals(str2)) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-        public boolean remove(T data){
-        return false;
-    }
 
         public Integer size() {
 

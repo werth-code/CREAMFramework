@@ -106,7 +106,7 @@ public class HashMapUh<K, V> {
 
     /**
      * use this method to
-     * remove the entry found at the passed key
+     * remove the entry associated with the passed key
      *
      * @param key the key to search for
      */

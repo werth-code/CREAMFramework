@@ -95,7 +95,7 @@ public class HashMapUhTest<K, V> {
 
     @Test
     public void testSize() {
-        Long expected = Long.valueOf(32);
+        Long expected = 32L;
 
         Long size = mapStrStr.size();
 
@@ -127,9 +127,37 @@ public class HashMapUhTest<K, V> {
         ArrayList test = newMap.getValuesAsArrayList();
         String value2 = mapStrStr.get("k9");
 
-        Assert.assertTrue(value1.equals(value2));
+        Assert.assertEquals(value1, value2);
     }
 
+    @Test
+    public void testClearStringBeforeIsTrue() throws IncorrectTypeException {
+        mapStrStr.put("k9", "dog");
+        mapStrStr.put("feline", "cat");
+        mapStrStr.put("rodent", "mouse");
+
+        String expected = "cat";
+        String actual = mapStrStr.get("feline");
+        HashMapUh newMap = mapStrStr.clear(mapStrStr);
+
+        Assert.assertTrue(actual == expected);
+    }
+
+    @Test
+    public void testClearNullAfter() throws IncorrectTypeException {
+        mapStrStr.put("k9", "dog");
+        mapStrStr.put("feline", "cat");
+        mapStrStr.put("rodent", "mouse");
+
+        String test1 = mapStrStr.get("feline");
+        HashMapUh newMap = mapStrStr.clear(mapStrStr);
+        String test2 = (String) newMap.get("feline");
+
+        Assert.assertNull(test2);
+    }
+
+    // todo create test to assert
+    //  an exception for incorrect type for put()
 
 }
 

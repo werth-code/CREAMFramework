@@ -26,9 +26,17 @@ import java.util.logging.Logger;
  */
 public class HashMapUh<K, V> {
     static Logger logger = Logger.getGlobal();
-    private int capacity; //Initial default capacity
-
+    private int capacity;
     private Entry<K, V>[] table;
+
+    // todo implement a check of size vs capacity
+    // and trigger to double
+
+    public HashMapUh clear(HashMapUh map) {
+        int mapSize = Math.toIntExact(map.size());
+        HashMapUh<K, V> newMap = new HashMapUh<>(mapSize);
+        return newMap;
+    }
 
     /**
      * scaleUp() method used to scale the capacity by
@@ -80,7 +88,6 @@ public class HashMapUh<K, V> {
         return size;
     }
 
-
     /**
      * use this method to put a key and value
      * into a custom hashmapuh
@@ -88,12 +95,8 @@ public class HashMapUh<K, V> {
      * @param value the value of key:value
      */
     public void put(K key, V value) throws IncorrectTypeException {
-        // todo implement a check of size vs capacity
-        // and a method for scaling up when outgrown
-
             int index = index(key);
             Entry<K, V> newEntry = new Entry<>(key, value, null);
-
             if (table[index] == null) {
                 table[index] = newEntry;
             } else {

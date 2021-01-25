@@ -1,23 +1,22 @@
 package com.codedifferently.collections.hashmapuh;
 
 import com.codedifferently.collections.hashmapuh.exceptions.EmptyArrayListException;
+import com.codedifferently.collections.hashmapuh.exceptions.Exception;
 import com.codedifferently.collections.hashmapuh.exceptions.MissingElementException;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+/**
+ * Use this class to create a custom hashmap with two parameters
+ *
+ * @param <K> key for key:val pair
+ * @param <V> val for key:val pair
+ */
 public class HashMapUh<K, V> {
 
     static Logger logger = Logger.getGlobal();
-
-    /**
-     * field defining default size of map
-     */
-    private int capacity = 16; //Initial default capacity
-
-    /**
-     * field defining an array of map entries
-     */
+    private int capacity; //Initial default capacity
     private Entry<K, V>[] table;
 
     //todo
@@ -34,9 +33,13 @@ public class HashMapUh<K, V> {
         table = new Entry[capacity];
     }
 
+    public Integer capacity() {
+        return capacity;
+    }
+
     /**
      * use this method to put a key and value
-     * into a hashmapuh
+     * into a custom hashmapuh
      * @param key   the key of key:value
      * @param value the value of key:value
      */
@@ -44,9 +47,9 @@ public class HashMapUh<K, V> {
         // todo implement a check of size vs capacity
         // and a method for scaling up when outgrown
 
-        try {
             int index = index(key);
             Entry<K, V> newEntry = new Entry<>(key, value, null);
+
             if (table[index] == null) {
                 table[index] = newEntry;
             } else {
@@ -63,10 +66,7 @@ public class HashMapUh<K, V> {
                 if (previousNode != null)
                     previousNode.setNext(newEntry);
             }
-        } catch (Exception e) {
-            System.out.println(e.toString());
         }
-    }
 
     /**
      * use this method to get the
@@ -97,8 +97,6 @@ public class HashMapUh<K, V> {
      */
     public void remove(K key) throws MissingElementException, NullPointerException {
         logger.info("trying remove operation " + key);
-
-
         int index = index(key);
         Entry previous = null;
         Entry entry = table[index];

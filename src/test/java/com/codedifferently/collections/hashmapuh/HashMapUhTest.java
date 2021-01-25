@@ -1,6 +1,7 @@
 package com.codedifferently.collections.hashmapuh;
 
 import com.codedifferently.collections.hashmapuh.exceptions.EmptyArrayListException;
+import com.codedifferently.collections.hashmapuh.exceptions.Exception;
 import com.codedifferently.collections.hashmapuh.exceptions.MissingElementException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,7 +17,7 @@ public class HashMapUhTest<K, V> {
     HashMapUh<String, String> mapStrStr = new HashMapUh<>(32);
 
     @Test
-    public void testGetByKey() throws Exception {
+    public void testGetByKey() throws java.lang.Exception {
         Integer testKey = 5;
         String expected = "testValue";
 
@@ -37,7 +38,7 @@ public class HashMapUhTest<K, V> {
     }
 
     @Test // test put() with <string, string>
-    public void testPut2() throws Exception {
+    public void testPut2() throws java.lang.Exception {
         String testKey = "testKey";
         String expected = "testValue";
 
@@ -48,7 +49,7 @@ public class HashMapUhTest<K, V> {
     }
 
     @Test
-    public void testRemoveSuccess() throws Exception {
+    public void testRemoveSuccess() throws java.lang.Exception {
         String testKey = "testKey";
         String testValue = "testValue";
 
@@ -64,7 +65,7 @@ public class HashMapUhTest<K, V> {
     }
 
     @Test // test third element after creating map and asking for array
-    public void testAsArrayist() throws Exception {
+    public void testAsArrayist() throws java.lang.Exception {
         ArrayList<String> items = new ArrayList<>();
         String expected = "mouse";
 
@@ -82,6 +83,14 @@ public class HashMapUhTest<K, V> {
         HashMapUh<Integer, String> emptyMapIntStr = new HashMapUh<>(32);
         ArrayList<String> items = emptyMapIntStr.getValuesAsArrayList();
     }
+
+    @Test
+    public void testGetCapacity() {
+        Integer expected = 32;
+        Integer actual = mapStrStr.capacity();
+        Assert.assertEquals(expected, actual);
+    }
+
 }
 
 

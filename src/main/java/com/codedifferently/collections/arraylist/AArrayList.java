@@ -10,18 +10,18 @@ public class AArrayList<T> {
     private Integer index;
     private Object data[];
     private int size;
-    private static final int SIZE_FACTOR=10;
+    private static final int SIZE_FACTOR = 10;
     static Logger logger = Logger.getGlobal();
 
 
-    public AArrayList(){
-        this.data= (T[]) new Object [SIZE_FACTOR];
-        this.size=SIZE_FACTOR;
+    public AArrayList() {
+        this.data = (T[]) new Object[SIZE_FACTOR];
+        this.size = SIZE_FACTOR;
     }
 
 
-    public void addToIndex(T data){
-        if(this.index==this.size-1){           //we need to increase the size of data[]
+    public void addToIndex(T data) {
+        if (this.index == this.size - 1) {           //we need to increase the size of data[]
             increaseSizeAndReallocate();
         }
         data[this.index] = data;
@@ -30,37 +30,63 @@ public class AArrayList<T> {
     }
 
     private void increaseSizeAndReallocate() {
-        this.size=this.size+SIZE_FACTOR;
-        Object newData[]=new Object[this.size];
-        for(int i=0; i<data.length;i++){
-            newData[i]=data[i];
+        this.size = this.size + SIZE_FACTOR;
+        Object newData[] = new Object[this.size];
+        for (int i = 0; i < data.length; i++) {
+            newData[i] = data[i];
         }
-        this.data= (T[]) newData;
+        this.data = (T[]) newData;
     }
 
-    public Object getByIndex(int i) throws Exception {
-        if(i>this.index-1){
+    public Object getByIndex(Integer i) throws Exception {
+        if (i > this.index - 1) {
             throw new Exception("ArrayIndexOutOfBound");
         }
-        if(i<0){
-            throw new Exception("Negative Value");
+        if (i < 0) {
+            throw new ValueDoesNotExistException();
         }
         return this.data[i];
-
     }
 
-    public void removeByIndex(int i) throws Exception{
-        if(i>this.index-1){
+    public void removeByIndex(Integer index) throws Exception {
+        if (index > this.index - 1) {
             throw new Exception("ArrayIndexOutOfBound");
         }
-        if(i<0){
-            throw new Exception("Negative Value");
+        if (index < 0) {
+            throw new Exception("NoValuePresent...Go Fish");
         }
-        System.out.println("Object getting removed:"+this.data[i]);
-        for(int x=i; x<this.data.length-1;x++){
-            data[x]=data[x+1];
+        logger.info("Object getting removed:" + this.data[index]);
+        for (int x = index; x < this.data.length - 1; x++) {
+            data[x] = data[x + 1];
         }
         this.index--;
     }
-}
 
+    public void setIndex(Integer index) {
+        this.index = index;
+        logger.info("Index is now set");
+        if (index != null) {
+            logger.warning("This index already exist");
+        }
+    }
+
+    public Integer size(Integer index) {
+        for (int x = index; x < this.data.length; x++) {
+            if (index == null) {
+                return 0;
+            }
+        }
+        return index;
+    }
+
+    public Boolean areYouEmpty(Object data[]) {
+        this.data = data;
+        for (int x = index; x < this.data.length; x++) {
+            if (x == 0) {
+                logger.info("NothingToSeeHereFolksMoveAlong");
+                return true;
+            }
+        }
+        return false;
+    }
+}

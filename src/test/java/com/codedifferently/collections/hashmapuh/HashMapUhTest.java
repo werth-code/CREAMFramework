@@ -183,9 +183,6 @@ public class HashMapUhTest<K, V> {
         HashMapUh<String, String> testMap = new HashMapUh<>(32);
         mapStrStr.containsValue("cat");
     }
-
-
-
     // todo create test to assert
     //  an exception for incorrect type for put()
 }

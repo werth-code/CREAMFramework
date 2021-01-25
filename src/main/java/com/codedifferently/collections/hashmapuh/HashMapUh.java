@@ -230,5 +230,4 @@ public class HashMapUh<K, V> {
         }
         return Math.abs(key.hashCode() % capacity);
     }
-
 }

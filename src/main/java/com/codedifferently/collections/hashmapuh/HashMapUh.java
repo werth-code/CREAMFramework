@@ -4,6 +4,7 @@ import com.codedifferently.collections.hashmapuh.exceptions.EmptyArrayListExcept
 import com.codedifferently.collections.hashmapuh.exceptions.Exception;
 import com.codedifferently.collections.hashmapuh.exceptions.MissingElementException;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
@@ -28,34 +29,21 @@ import java.util.logging.Logger;
 public class HashMapUh<K, V> {
     static Logger logger = Logger.getGlobal();
     private int capacity; //Initial default capacity
+
     private Entry<K, V>[] table;
 
-    protected Entry[] scaleUp(HashMapUh map) {
-        Entry[] cloneArray = map.table.clone(); // clone the existing array
-        Long currentCapacity = map.size(); // get current capacity
+    /**
+     * scaleUp() method used to scale the capacity by
+     * double. It takes in a HashMapUh
+     *
+     * @param map map reference to the map passed in
+     * @return map (clone with double capacity)
+     */
+    protected HashMapUh scaleUp(HashMapUh map) {
         int newCapacity = (int) (map.size() * 2); // establish new capacity
-
-        // instantiate array with twice as many slots
-        table = new Entry[newCapacity];
-
-        // stream the cloned array into the new one
-
-        System.out.println(table.length);
-
-
-        return null;
-        // 2 process, copy array to temp array.
-        // get current capacity of Enty table
-        // copy table to temparr
-
-        // 3 expand array by increment on instantiation
-        // 4 copy temp array into new array.
-        // 5 return new table
+        this.table = Arrays.copyOf(map.table.clone(), newCapacity);
+        return map;
     }
-
-
-
-
 
     /**
      * Use this method to create a new Entry[] table of [int capacity] size
@@ -66,13 +54,6 @@ public class HashMapUh<K, V> {
         this.capacity = capacity;
         table = new Entry[capacity];
     }
-
-    public HashMapUh(int capacity, HashMapUh map) {
-        this.capacity = capacity;
-        table = new Entry[capacity];
-    }
-
-
 
     /**
      * capacity(): method is used to get the

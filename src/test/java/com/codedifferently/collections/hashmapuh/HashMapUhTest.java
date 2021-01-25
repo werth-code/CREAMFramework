@@ -28,7 +28,7 @@ public class HashMapUhTest<K, V> {
     }
 
     @Test // test put() with <int, string>
-    public void testPut() throws Exception {
+    public void testPutWithIntStringParams() throws Exception {
         String expected = "textValue";
 
         mapIntStr.put(1, expected);
@@ -37,8 +37,8 @@ public class HashMapUhTest<K, V> {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test // test put() with <string, string>
-    public void testPut2() throws java.lang.Exception {
+    @Test
+    public void testPutWithTwoStringParams() throws java.lang.Exception {
         String testKey = "testKey";
         String expected = "testValue";
 
@@ -103,10 +103,34 @@ public class HashMapUhTest<K, V> {
     }
 
     @Test
-    public void testScaleUp() {
-        mapStrStr.scaleUp(mapStrStr);
-        
+    public void testScaleUpSizeDoubles() throws EmptyArrayListException, Exception {
+        mapStrStr.put("k9", "dog");
+        mapStrStr.put("feline", "cat");
+        mapStrStr.put("rodent", "mouse");
+
+        Integer size1 = Math.toIntExact(mapStrStr.size());
+        HashMapUh<K, V> newMap = mapStrStr.scaleUp(mapStrStr);
+        ArrayList test = newMap.getValuesAsArrayList();
+        Integer size2 = Math.toIntExact(mapStrStr.size());
+
+        Assert.assertTrue(size1 == size2/2);
     }
+
+    @Test
+    public void testScaleUpContentRetained() throws EmptyArrayListException, Exception {
+        mapStrStr.put("k9", "dog");
+        mapStrStr.put("feline", "cat");
+        mapStrStr.put("rodent", "mouse");
+
+        String value1 = mapStrStr.get("k9");
+        HashMapUh<K, V> newMap = mapStrStr.scaleUp(mapStrStr);
+        ArrayList test = newMap.getValuesAsArrayList();
+        String value2 = mapStrStr.get("k9");
+
+        Assert.assertTrue(value1.equals(value2));
+    }
+
+
 }
 
 

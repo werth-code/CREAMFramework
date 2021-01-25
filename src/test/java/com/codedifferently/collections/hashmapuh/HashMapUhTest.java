@@ -155,10 +155,8 @@ public class HashMapUhTest<K, V> {
 
         Assert.assertNull(test2);
     }
-
     // todo create test to assert
     //  an exception for incorrect type for put()
-
 }
 
 

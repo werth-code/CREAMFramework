@@ -30,8 +30,16 @@ public class HashMapUh<K, V> {
     private Entry<K, V>[] table;
 
     // todo implement a check of size vs capacity
-    // and trigger to double
+    // and trigger to double the size
 
+    /**
+     * clear() method returns an empty map
+     * of the same capacity
+     * @param map is the hashMapUh passed in
+     * to be deallocated and replaced with a
+     * new HashMapUh
+     * @return
+     */
     public HashMapUh clear(HashMapUh map) {
         int mapSize = Math.toIntExact(map.size());
         HashMapUh<K, V> newMap = new HashMapUh<>(mapSize);

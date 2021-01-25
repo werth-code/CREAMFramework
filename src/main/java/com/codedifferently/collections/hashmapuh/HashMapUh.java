@@ -38,12 +38,11 @@ public class HashMapUh<K, V> {
      * @param map is the hashMapUh passed in
      * to be deallocated and replaced with a
      * new HashMapUh
-     * @return
+     * @return HashMapUh
      */
     public HashMapUh clear(HashMapUh map) {
         int mapSize = Math.toIntExact(map.size());
-        HashMapUh<K, V> newMap = new HashMapUh<>(mapSize);
-        return newMap;
+        return new HashMapUh<K, V>(mapSize);
     }
 
     /**

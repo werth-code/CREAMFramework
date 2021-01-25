@@ -178,7 +178,11 @@ public class HashMapUhTest<K, V> {
         Assert.assertFalse(containsValue);
     }
 
-
+    @Test(expected = EmptyArrayListException.class)
+    public void testContainsValueEmptyArrayException() throws EmptyArrayListException, IncorrectTypeException{
+        HashMapUh<String, String> testMap = new HashMapUh<>(32);
+        mapStrStr.containsValue("cat");
+    }
 
 
     // todo create test to assert

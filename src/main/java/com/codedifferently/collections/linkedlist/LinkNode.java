@@ -1,25 +1,25 @@
 package com.codedifferently.collections.linkedlist;
 
-public class LinkNode <T>{
+import java.util.function.Consumer;
+
+public class LinkNode<T>  {
     private T data;
     private LinkNode<T> nextNode;
-    private LinkNode<T> prevNode;
 
     LinkNode(T data) {
         this.data = data;
         this.nextNode = null;
-        //prevNode = null;
     }
 
     public T getData() {
         return data;
     }
 
-    public LinkNode getNextNode() {
+    public LinkNode<T> getNextNode() {
         return nextNode;
     }
 
-    public void setNextNode(LinkNode nextNode) {
+    public void setNextNode(LinkNode<T> nextNode) {
         this.nextNode = nextNode;
     }
 
@@ -30,4 +30,5 @@ public class LinkNode <T>{
                 ", nextNode=" + getNextNode() +
                 '}';
     }
+
 }

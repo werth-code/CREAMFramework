@@ -1,6 +1,5 @@
 package com.codedifferently.collections.arraylist;
 
-import com.codedifferently.collections.arraylist.exceptions.IndexDoesNotExistException;
 import com.codedifferently.collections.arraylist.exceptions.ValueDoesNotExistException;
 
 import java.util.ArrayList;
@@ -20,11 +19,11 @@ public class AArrayList<T> {
     }
 
 
-    public void addToIndex(T data) {
+    public void addToIndex(Object index, Object element) {
         if (this.index == this.size - 1) {           //we need to increase the size of data[]
             increaseSizeAndReallocate();
         }
-        data[this.index] = data;
+        data[this.index] = element;
         this.index++;
 
     }

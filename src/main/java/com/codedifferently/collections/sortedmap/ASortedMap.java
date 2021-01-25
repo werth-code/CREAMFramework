@@ -1,4 +1,9 @@
 package com.codedifferently.collections.sortedmap;
 
-public class ASortedMap {
+import com.codedifferently.collections.arraylist.ArrayList;
+
+public class ASortedMap<T> {
+    private ArrayList<T> container;
+
+    //
 }

@@ -1,5 +1,6 @@
 package com.codedifferently.collections.unsortedmap;
 
+import com.codedifferently.collections.Map;
 import com.codedifferently.collections.unsortedmap.exceptions.EmptyArrayListException;
 import com.codedifferently.collections.unsortedmap.exceptions.IncorrectTypeException;
 import com.codedifferently.collections.unsortedmap.exceptions.MissingElementException;
@@ -23,7 +24,7 @@ import java.util.logging.Logger;
         * @param <V> val for key:val pair
         */
 
-public class HashMapUh<K, V> {
+public class HashMapUh<K, V>  {
     static Logger logger = Logger.getGlobal();
     private int capacity;
     private Entry<K, V>[] table;
@@ -209,10 +210,32 @@ public class HashMapUh<K, V> {
      * @param key the key to hash
      * @return int representation of hashed index
      */
+;
+    public Boolean containsValue(String value) throws EmptyArrayListException {
+        ArrayList values = new ArrayList(getValuesAsArrayList());
+        Boolean containsValue = values.contains(value);
+        return containsValue;
+    }
+
+    /**
+     * use this method to create an index
+     * from the hashcode calculated from
+     * passed key
+     *
+     * @param key the key to hash
+     * @return int representation of hashed index
+     */
     private int index(K key) {
         if (key == null) {
             return 0;
         }
         return Math.abs(key.hashCode() % capacity);
+    }
+
+    @Override
+    public String toString() {
+        return "HashMapUh{" +
+                Arrays.toString(table) +
+                '}';
     }
 }

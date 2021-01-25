@@ -1,6 +1,6 @@
 package UnsortedSet;
 
-import com.codedifferently.collections.unsortedset.AUnsortedSet;
+import com.codedifferently.collections.unsortedset.UnsortedSet;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,11 +8,11 @@ import org.junit.Test;
 import java.util.Arrays;
 
 public class AUnsortedSetTest {
-    AUnsortedSet<Integer> set;
+    UnsortedSet<Integer> set;
 
     @Before
     public void setUp() {
-        set = new AUnsortedSet<>();
+        set = new UnsortedSet<>();
     }
 
     @Test

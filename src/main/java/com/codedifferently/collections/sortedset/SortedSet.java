@@ -1,12 +1,12 @@
 package com.codedifferently.collections.sortedset;
 
-import com.codedifferently.collections.unsortedset.AUnsortedSet;
+import com.codedifferently.collections.unsortedset.UnsortedSet;
 import com.codedifferently.collections.unsortedset.NoDataInParameterException;
 
 import java.util.Arrays;
 import java.util.logging.Logger;
 
-public class ASortedSet<T> extends AUnsortedSet<T> {
+public class SortedSet<T> extends UnsortedSet<T> {
     Logger logger = Logger.getGlobal();
 
     @Override

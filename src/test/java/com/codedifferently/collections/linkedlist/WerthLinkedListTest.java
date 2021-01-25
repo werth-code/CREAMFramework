@@ -4,15 +4,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ALinkedListTest {
+public class WerthLinkedListTest {
 
-    ALinkedList<Integer> listInt;
-    ALinkedList<String> listStr;
+    WerthLinkedList<Integer> listInt;
+    WerthLinkedList<String> listStr;
 
     @Before
     public void setUp() {
-        listInt = new ALinkedList<>();
-        listStr = new ALinkedList<>();
+        listInt = new WerthLinkedList<>();
+        listStr = new WerthLinkedList<>();
     }
 
     @Test

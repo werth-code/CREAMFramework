@@ -1,20 +1,17 @@
 package com.codedifferently.collections;
 
-import com.codedifferently.collections.arraylist.AArrayList;
-import com.codedifferently.collections.linkedlist.ALinkedList;
-import com.codedifferently.collections.sortedset.ASortedSet;
-import com.codedifferently.collections.unsortedset.AUnsortedSet;
-
-import java.util.SortedMap;
-import java.util.SortedSet;
+import com.codedifferently.collections.arraylist.ArrayList;
+import com.codedifferently.collections.linkedlist.WerthLinkedList;
+import com.codedifferently.collections.unsortedmap.HashMapUh;
+import com.codedifferently.collections.unsortedset.UnsortedSet;
 
 public class CreamFramework {
     public static void main(String[] args) throws Exception {
 
         //// TODO: 1/25/21 LinkedList
 
-        ALinkedList<Integer> list = new ALinkedList<>();
-        ALinkedList<String> list2 = new ALinkedList<>();
+        WerthLinkedList<Integer> list = new WerthLinkedList<>();
+        WerthLinkedList<String> list2 = new WerthLinkedList<>();
         list2.add("Hi");
 
         list.add(1);
@@ -28,7 +25,7 @@ public class CreamFramework {
 
         //// TODO: 1/25/21 UnsortedSet
 
-        AUnsortedSet<String> unsortedSet = new AUnsortedSet<>();
+        UnsortedSet<String> unsortedSet = new UnsortedSet<>();
         unsortedSet.add("Hi");
         unsortedSet.add("How Are You Tariq?");
         unsortedSet.add("HOW ARE YOU");
@@ -37,11 +34,18 @@ public class CreamFramework {
 
         //// TODO: 1/25/21 ArrayList
 
-        AArrayList<String> arrayList = new AArrayList<>();
+        ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("Hello");
         arrayList.add("Goodbye");
 
         arrayList.forEach(System.out::println);
+
+        //// TODO: 1/25/21 HashMapUh
+
+        HashMapUh<String, Integer> hmap = new HashMapUh<>(10);
+        hmap.put("age", 33);
+
+        System.out.println(hmap.get("age"));
 
 
     }

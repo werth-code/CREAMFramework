@@ -1,19 +1,19 @@
 package com.codedifferently.collections.unsortedset;
 
-import com.codedifferently.collections.ASet;
+import com.codedifferently.collections.Set;
 
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
-public class AUnsortedSet<T> implements ASet<T>, Iterable<T> {
+public class UnsortedSet<T> implements Set<T>, Iterable<T> {
     private T[] backingArray;
     private int counter;
 
     private static final Integer SIZE = 10;
     Logger logger = Logger.getGlobal();
 
-    public AUnsortedSet(){
+    public UnsortedSet(){
         backingArray=(T[]) new Object[SIZE];
         counter = 0;
     }

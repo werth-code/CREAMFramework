@@ -1,6 +1,6 @@
 package com.codedifferently.collections.linkedlist;
 
-import com.codedifferently.collections.AList;
+import com.codedifferently.collections.List;
 import com.codedifferently.collections.linkedlist.exceptions.ListHasNoElementsException;
 
 import java.util.Iterator;
@@ -10,7 +10,7 @@ import java.util.Spliterators;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
-public class ALinkedList <T> implements AList<T>, Iterable<T> {
+public class WerthLinkedList<T> implements List<T>, Iterable<T> {
     static Logger logger = Logger.getGlobal();
     private LinkNode<T> head;
     private Integer count = 0;
@@ -34,7 +34,7 @@ public class ALinkedList <T> implements AList<T>, Iterable<T> {
     static class ALinkedListIterator <T> implements Iterator<T> {
         LinkNode<T> current;
 
-        public ALinkedListIterator(ALinkedList<T> list) {
+        public ALinkedListIterator(WerthLinkedList<T> list) {
             current = list.getHeadNode();
         }
 

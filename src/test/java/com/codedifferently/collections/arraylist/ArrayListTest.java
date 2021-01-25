@@ -4,14 +4,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-public class AArrayListTest {
-    AArrayList<String> strList;
+public class ArrayListTest {
+    ArrayList<String> strList;
 
     @Before
     public void setUp() throws Exception {
-        strList = new AArrayList<>();
+        strList = new ArrayList<>();
     }
 
     @Test

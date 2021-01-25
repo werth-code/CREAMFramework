@@ -1,13 +1,13 @@
 package com.codedifferently.collections.arraylist;
 
-import com.codedifferently.collections.AList;
+import com.codedifferently.collections.List;
 import com.codedifferently.collections.arraylist.exceptions.IndexDoesNotExistException;
 import com.codedifferently.collections.arraylist.exceptions.ValueDoesNotExistException;
 
 import java.util.Iterator;
 import java.util.logging.Logger;
 
-public class AArrayList<T> implements AList<T>, Iterable<T> {
+public class ArrayList<T> implements List<T>, Iterable<T> {
     private static final int SIZE = 10;
     private int size;
     private T[] items;
@@ -87,7 +87,7 @@ public class AArrayList<T> implements AList<T>, Iterable<T> {
         return null;
     }
 
-    public AArrayList() {
+    public ArrayList() {
         clear();
     }
 
@@ -129,7 +129,7 @@ public class AArrayList<T> implements AList<T>, Iterable<T> {
         }
 
         public void remove() {
-            AArrayList.this.remove(--current);
+            ArrayList.this.remove(--current);
         }
     }
 

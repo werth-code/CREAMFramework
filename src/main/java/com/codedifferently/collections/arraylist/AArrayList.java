@@ -1,3 +1,5 @@
+package com.codedifferently.collections.arraylist;
+
 import com.codedifferently.collections.arraylist.exceptions.IndexDoesNotExistException;
 import com.codedifferently.collections.arraylist.exceptions.ValueDoesNotExistException;
 
@@ -6,80 +8,59 @@ import java.util.logging.Logger;
 
 public class AArrayList<T> {
     private Integer index;
-    private T value;
+    private Object data[];
+    private int size;
+    private static final int SIZE_FACTOR=10;
     static Logger logger = Logger.getGlobal();
 
 
-    public T getByIndex(Integer index) {
-        try {
-            if (this.index == null) throw new IndexDoesNotExistException();     //Printing all indexes instead of called index
-        } catch (IndexDoesNotExistException e) {
-            logger.warning ("This Index Does Not Exist");
+    public AArrayList(){
+        this.data= (T[]) new Object [SIZE_FACTOR];
+        this.size=SIZE_FACTOR;
+    }
+
+
+    public void addToIndex(T data){
+        if(this.index==this.size-1){           //we need to increase the size of data[]
+            increaseSizeAndReallocate();
         }
-        return value;
+        data[this.index] = data;
+        this.index++;
+
     }
 
-    public T getByValue(ArrayList<T> value) {
-        try {
-            if (this.value == null) throw new ValueDoesNotExistException();      //Printing all indexes instead of called index
-        } catch (ValueDoesNotExistException e) {
-            logger.warning("This Value Does Not Exist");
+    private void increaseSizeAndReallocate() {
+        this.size=this.size+SIZE_FACTOR;
+        Object newData[]=new Object[this.size];
+        for(int i=0; i<data.length;i++){
+            newData[i]=data[i];
         }
-        return (T) value;
+        this.data= (T[]) newData;
     }
 
-    public Boolean addValue(ArrayList<T> value){
-        this.value = (T) value;
-        return true;
-    }
-
-
-    public void setValue(ArrayList<T> value) {
-        this.value = (T) value;
-    }
-
-    public Boolean contains(ArrayList<T> value) {
-        for (Object val : value) {
-            if (val == value) {
-                return true;
-            } else {
-                return false;
-            }
+    public Object getByIndex(int i) throws Exception {
+        if(i>this.index-1){
+            throw new Exception("ArrayIndexOutOfBound");
         }
-        return true;
+        if(i<0){
+            throw new Exception("Negative Value");
+        }
+        return this.data[i];
+
     }
 
-    public Integer size(ArrayList<T> value) {  //How do you get the number of values in size
-        for (Object list : value) {
+    public void removeByIndex(int i) throws Exception{
+        if(i>this.index-1){
+            throw new Exception("ArrayIndexOutOfBound");
         }
-        return value.size();
-    }
-
-    public Boolean isEmpty(ArrayList<T> value) {
-        this.value = (T) value;
-        if (value == null) {
-            return true;
-        } else {
-            return false;
+        if(i<0){
+            throw new Exception("Negative Value");
         }
-    }
-
-    public void clear(ArrayList<T> value) {
-        this.value = (T) value;
-        if (value != null) {
-            value.clear();
+        System.out.println("Object getting removed:"+this.data[i]);
+        for(int x=i; x<this.data.length-1;x++){
+            data[x]=data[x+1];
         }
-    }
-
-    public T remove(AArrayList<T> value) {
-        this.value = (T) value;
-        this.index = index;
-        for (int i = 0; i < value.size(); i++) {                   //Don't know how to get the length of the value
-            if (index != null) {
-                value.remove(index);                                                    //delete the value here
-            }
-        }
-        return null;
+        this.index--;
     }
 }
 

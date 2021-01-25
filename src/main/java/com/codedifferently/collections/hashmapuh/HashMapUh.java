@@ -29,14 +29,33 @@ public class HashMapUh<K, V> {
     static Logger logger = Logger.getGlobal();
     private int capacity; //Initial default capacity
     private Entry<K, V>[] table;
-    public Long size() {
-        Long size = Arrays.stream(this.table).count();
-        return size;
+
+    protected Entry[] scaleUp(HashMapUh map) {
+        Entry[] cloneArray = map.table.clone(); // clone the existing array
+        Long currentCapacity = map.size(); // get current capacity
+        int newCapacity = (int) (map.size() * 2); // establish new capacity
+
+        // instantiate array with twice as many slots
+        table = new Entry[newCapacity];
+
+        // stream the cloned array into the new one
+
+        System.out.println(table.length);
+
+
+        return null;
+        // 2 process, copy array to temp array.
+        // get current capacity of Enty table
+        // copy table to temparr
+
+        // 3 expand array by increment on instantiation
+        // 4 copy temp array into new array.
+        // 5 return new table
     }
 
-    //todo
-    // create a method that takes in a map and capacity
-    // to scale the map up in size when outgrown
+
+
+
 
     /**
      * Use this method to create a new Entry[] table of [int capacity] size
@@ -48,9 +67,40 @@ public class HashMapUh<K, V> {
         table = new Entry[capacity];
     }
 
-    public Integer capacity() {
+    public HashMapUh(int capacity, HashMapUh map) {
+        this.capacity = capacity;
+        table = new Entry[capacity];
+    }
+
+
+
+    /**
+     * capacity(): method is used to get the
+     * default size of the table storing the map
+     * Entry object.
+     * Use size() to get the current capacity of any table
+     * after resizing has taken place
+     *
+     * @return the default capacity if creating new
+     * HashMapUh {}
+     *
+     */
+    public int capacity() {
         return capacity;
     }
+
+    /**
+     * size(): method is used to look into the table
+     * storing the elements and get the current length
+     * **capacity, not object count**
+     *
+     * @return **capacity, not object count**
+     */
+    public Long size() {
+        Long size = Arrays.stream(this.table).count();
+        return size;
+    }
+
 
     /**
      * use this method to put a key and value
@@ -138,6 +188,7 @@ public class HashMapUh<K, V> {
     /**
      * create ArrayList from values in HashMapUh
      *
+     * @return ArrayList created
      */
     public ArrayList getValuesAsArrayList() throws EmptyArrayListException {
         ArrayList<String> items = new ArrayList();

@@ -101,6 +101,12 @@ public class HashMapUhTest<K, V> {
 
         Assert.assertEquals(expected, size);
     }
+
+    @Test
+    public void testScaleUp() {
+        mapStrStr.scaleUp(mapStrStr);
+        
+    }
 }
 
 

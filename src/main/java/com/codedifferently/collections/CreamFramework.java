@@ -2,6 +2,7 @@ package com.codedifferently.collections;
 
 import com.codedifferently.collections.arraylist.ArrayList;
 import com.codedifferently.collections.linkedlist.WerthLinkedList;
+import com.codedifferently.collections.sortedset.SortedSet;
 import com.codedifferently.collections.unsortedmap.HashMapUh;
 import com.codedifferently.collections.unsortedset.UnsortedSet;
 
@@ -31,6 +32,12 @@ public class CreamFramework {
         unsortedSet.add("HOW ARE YOU");
 
         System.out.println("***** " + unsortedSet.isEmpty() + " " + unsortedSet.size());
+
+        unsortedSet.forEach(System.out::println);
+
+//        for(String ele : unsortedSet) {
+//            System.out.println(ele);
+//        }
 
         //// TODO: 1/25/21 ArrayList
 

@@ -2,8 +2,12 @@ package com.codedifferently.collections;
 
 import com.codedifferently.collections.arraylist.ArrayList;
 import com.codedifferently.collections.linkedlist.WerthLinkedList;
+import com.codedifferently.collections.sortedset.SortedSet;
 import com.codedifferently.collections.unsortedmap.HashMapUh;
 import com.codedifferently.collections.unsortedset.UnsortedSet;
+
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class CreamFramework {
     public static void main(String[] args) throws Exception {
@@ -31,6 +35,20 @@ public class CreamFramework {
         unsortedSet.add("HOW ARE YOU");
 
         System.out.println("***** " + unsortedSet.isEmpty() + " " + unsortedSet.size());
+
+        unsortedSet.forEach(System.out::println);
+
+//        for(String ele : unsortedSet) {
+//            System.out.println(ele);
+//        }
+
+        // TODO: 1/26/21 SortedSet
+        SortedSet<Integer> sortedSet = new SortedSet<>();
+        sortedSet.add(10);
+        sortedSet.add(5);
+        sortedSet.add(1);
+
+        System.out.println(sortedSet.toString());
 
         //// TODO: 1/25/21 ArrayList
 

@@ -1,23 +1,22 @@
 package com.codedifferently.collections.sortedmap;
 
-public class KeyVal<T> {
-    private String hash;
-    private T key;
-    private T value;
+public class KeyVal<K, V> {
+    private K key;
+    private V value;
 
-    public T getKey() {
+    public K getKey() {
         return key;
     }
 
-    public void setKey(T key) {
-        this.key = key;gi
+    public void setKey(K key) {
+        this.key = key;
     }
 
-    public T getValue() {
+    public V getValue() {
         return value;
     }
 
-    public void setValue(T value) {
+    public void setValue(V value) {
         this.value = value;
     }
 }

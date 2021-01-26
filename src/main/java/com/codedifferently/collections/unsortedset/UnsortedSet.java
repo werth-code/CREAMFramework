@@ -133,26 +133,31 @@ public class UnsortedSet<T> implements Set<T>, Iterable<T> {
     }
 
     @Override
+    public String toString() {
+        return
+                "set = " + Arrays.toString(backingArray) +
+                ", counter=" + counter +
+                '}';
+    }
+
+    @Override
     public Boolean isEmpty() {
         return this.counter == 0;
     }
 
+
     public Object[] toArray() { //// TODO: 1/25/21 this should remove null values
         return this.getBackingArray();
     }
-
     public T[] getBackingArray() {
         return backingArray;
     }
-
     public void setBackingArray(T[] backingArray) {
         this.backingArray = backingArray;
     }
-
     public int getCounter() {
         return counter;
     }
-
     public void setCounter(int counter) {
         this.counter = counter;
     }

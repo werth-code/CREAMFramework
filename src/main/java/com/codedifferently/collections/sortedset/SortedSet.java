@@ -50,16 +50,19 @@ public class SortedSet<T> implements Set<T> {
 
     @Override
     public Integer size() {
+
         return count;
     }
 
     @Override
     public void clear() {
-
+        setItems = new ArrayList<>();
     }
 
     @Override
     public Boolean isEmpty() {
-        return null;
+        setItems = new ArrayList<>();
+        count = 0;
+        return true;
     }
 }

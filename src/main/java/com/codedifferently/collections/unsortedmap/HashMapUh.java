@@ -1,6 +1,5 @@
 package com.codedifferently.collections.unsortedmap;
 
-import com.codedifferently.collections.Map;
 import com.codedifferently.collections.unsortedmap.exceptions.EmptyArrayListException;
 import com.codedifferently.collections.unsortedmap.exceptions.IncorrectTypeException;
 import com.codedifferently.collections.unsortedmap.exceptions.MissingElementException;
@@ -40,6 +39,7 @@ public class HashMapUh<K, V>  {
      * new HashMapUh
      * @return
      */
+
 
     public HashMapUh clear(HashMapUh map) {
         int mapSize = Math.toIntExact(map.size());
@@ -179,7 +179,6 @@ public class HashMapUh<K, V>  {
                 throw new MissingElementException();
             }
             previous = entry;
-            //entry = entry.getNext();
         }
     }
 

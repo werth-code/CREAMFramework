@@ -42,13 +42,20 @@ public class CreamFramework {
 //            System.out.println(ele);
 //        }
 
+
         // TODO: 1/26/21 SortedSet
         SortedSet<Integer> sortedSet = new SortedSet<>();
         sortedSet.add(10);
         sortedSet.add(5);
         sortedSet.add(1);
 
+        SortedSet<String> sortedSetstr = new SortedSet<>();
+        sortedSetstr.add("Bat");
+        sortedSetstr.add("Zoo");
+        sortedSetstr.add("Penguin");
+
         System.out.println(sortedSet.toString());
+        System.out.println(sortedSetstr.toString());
 
         //// TODO: 1/25/21 ArrayList
 

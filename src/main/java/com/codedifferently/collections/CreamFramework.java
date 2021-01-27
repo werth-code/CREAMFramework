@@ -56,6 +56,7 @@ public class CreamFramework {
         arrayList.add("Hello");
         arrayList.add("Goodbye");
 
+        System.out.println(arrayList.get(0));
         arrayList.forEach(System.out::println);
 
         //// TODO: 1/25/21 HashMapUh

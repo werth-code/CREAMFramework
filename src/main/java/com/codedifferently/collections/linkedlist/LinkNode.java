@@ -2,6 +2,8 @@ package com.codedifferently.collections.linkedlist;
 
 import java.util.function.Consumer;
 
+// This is our LinkedList Node
+
 public class LinkNode<T>  {
     private T data;
     private LinkNode<T> nextNode;

@@ -15,10 +15,11 @@ public class UnsortedSet<T> implements Set<T>, Iterable<T> {
     Logger logger = Logger.getGlobal();
 
     public UnsortedSet(){
-        backingArray = (T[]) new Object[SIZE];
-        counter = 0;
+        backingArray = (T[]) new Object[SIZE]; // This is our container array
+        counter = 0; // This is how many items are inside our set
     }
 
+    // Matt is insane and decided to go off road...
     private class AUnsortedSetIterator<T> implements Iterator<T> {
         private int current;
         private T lastElement;
@@ -69,20 +70,23 @@ public class UnsortedSet<T> implements Set<T>, Iterable<T> {
         return Spliterators.spliterator(iterator(), size(), Spliterator.ORDERED);
     }
 
+
+    // Danielle is back on track...
+
     @Override
     public Boolean add(T data){
         try {
-            if (data == null) throw new NoDataInParameterException();
-            for (Object element : backingArray) {
-                if (element == data) return false;
+            if (data == null) throw new NoDataInParameterException(); // if they pass in a null value throw exception
+            for (Object element : backingArray) {  // looping through all elements
+                if (element == data) return false; // don't add if it exists
             }
 
-            if (counter == backingArray.length) expandArray(data);
+            if (counter == backingArray.length) expandArray(data); // if we fill our array, expand it.
             else {
-                backingArray[counter] = data;
+                backingArray[counter] = data; //add the data
                 counter++;
             }
-            return true;
+            return true; // if item is successfully added return true
 
         } catch (NoDataInParameterException e) {
             logger.warning("The Data Parameter Must Not Be Empty.");
@@ -91,15 +95,15 @@ public class UnsortedSet<T> implements Set<T>, Iterable<T> {
     }
 
     public void expandArray(T data) {
-        T[] newArray = Arrays.copyOf(backingArray, backingArray.length * 2);
-        newArray[counter] = data;
+        T[] newArray = Arrays.copyOf(backingArray, backingArray.length * 2); // double the size of the array/
+        newArray[counter] = data; // insert the new data at last index
         counter++;
-        backingArray = newArray;
+        backingArray = newArray; // set the old array to the new array
     }
 
     @Override
     public Boolean contains(T value) {
-        for(T val : this.getBackingArray()) {
+        for(T val : this.getBackingArray()) { // check if the value is present in our array
             if(val == value) return true;
         }
         return false;
@@ -107,14 +111,14 @@ public class UnsortedSet<T> implements Set<T>, Iterable<T> {
 
     @Override
     public Object get(T data) {
-        for(T val : this.getBackingArray()) {
+        for(T val : this.getBackingArray()) { // same as contains, return the value.
             if(val == data) return data;
         }
         return null;
     }
 
-    public Boolean remove(T data){
-        for(int i = 0; i < this.getBackingArray().length; i++) {
+    public Boolean remove(T data) {
+        for(int i = 0; i < this.getBackingArray().length; i++) {  // remove the item from list
             if(data == backingArray[i]) {
                 backingArray[i] = null;
                 return true;
@@ -123,13 +127,13 @@ public class UnsortedSet<T> implements Set<T>, Iterable<T> {
         return false;
     }
 
-    public Integer size() {
+    public Integer size() { // tell you the size based on our counter
         return this.counter;
     }
 
     @Override
     public void clear() {
-        this.backingArray = (T[]) new Object[SIZE];
+        this.backingArray = (T[]) new Object[SIZE]; // set our array to a new empty array
     }
 
     @Override
@@ -145,8 +149,7 @@ public class UnsortedSet<T> implements Set<T>, Iterable<T> {
         return this.counter == 0;
     }
 
-
-    public Object[] toArray() { //// TODO: 1/25/21 this should remove null values
+    public Object[] toArray() {
         return this.getBackingArray();
     }
     public T[] getBackingArray() {

@@ -35,20 +35,6 @@ public class ArrayListTest {
     }
 
     @Test
-    public void remove() {
-        strList.add("Armadillo");
-        strList.add("Chipmunk");
-
-        strList.remove(0);
-
-        String actual = strList.get(0);
-        String expected = "Chipmunk";
-        System.out.println(actual);
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
     public void size() {
         strList.add("Armadillo");
         strList.add("Chipmunk");
@@ -83,6 +69,32 @@ public class ArrayListTest {
 
         Boolean actual = strList.isEmpty();
         Boolean expected = true;
+        System.out.println(actual);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void removeDATA() {
+        strList.add("Armadillo");
+        strList.add("Chipmunk");
+
+        String actual = strList.remove("Chipmunk");
+        String expected = "Chipmunk";
+        System.out.println(actual);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void removeINDEX() {
+        strList.add("Armadillo");
+        strList.add("Chipmunk");
+
+        strList.remove(0);
+
+        String actual = strList.get(0);
+        String expected = "Chipmunk";
         System.out.println(actual);
 
         Assert.assertEquals(expected, actual);

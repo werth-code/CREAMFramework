@@ -22,7 +22,7 @@ import java.util.logging.Logger;
         *
         * @param <K> key for key:val pair
         * @param <V> val for key:val pair
-        */
+*/
 
 public class HashMapUh<K, V>  {
     static Logger logger = Logger.getGlobal();
@@ -40,6 +40,7 @@ public class HashMapUh<K, V>  {
      * new HashMapUh
      * @return
      */
+
     public HashMapUh clear(HashMapUh map) {
         int mapSize = Math.toIntExact(map.size());
         HashMapUh<K, V> newMap = new HashMapUh<>(mapSize);
@@ -53,6 +54,7 @@ public class HashMapUh<K, V>  {
      * @param map map reference to the map passed in
      * @return map (clone with double capacity)
      */
+
     protected HashMapUh scaleUp(HashMapUh map) {
         int newCapacity = (int) (map.size() * 2); // establish new capacity
         this.table = Arrays.copyOf(map.table.clone(), newCapacity);
@@ -64,6 +66,7 @@ public class HashMapUh<K, V>  {
      *
      * @param capacity refers to the size of the table to create
      */
+
     public HashMapUh(int capacity) {
         this.capacity = capacity;
         table = new Entry[capacity];
@@ -80,6 +83,7 @@ public class HashMapUh<K, V>  {
      * HashMapUh {}
      *
      */
+
     public int capacity() {
         return capacity;
     }
@@ -91,6 +95,7 @@ public class HashMapUh<K, V>  {
      *
      * @return **capacity, not object count**
      */
+
     public Long size() {
         Long size = Arrays.stream(this.table).count();
         return size;
@@ -102,6 +107,7 @@ public class HashMapUh<K, V>  {
      * @param key   the key of key:value
      * @param value the value of key:value
      */
+
     public void put(K key, V value) throws IncorrectTypeException {
         int index = index(key);
         Entry<K, V> newEntry = new Entry<>(key, value, null);
@@ -130,6 +136,7 @@ public class HashMapUh<K, V>  {
      * @param key the key to search for
      * @return the value associated with the passed key
      */
+
     public V get(K key) {
         V value = null;
         int index = index(key);
@@ -150,6 +157,7 @@ public class HashMapUh<K, V>  {
      *
      * @param key the key to search for
      */
+
     public void remove(K key) throws MissingElementException, NullPointerException {
         logger.info("trying remove operation " + key);
         int index = index(key);
@@ -180,6 +188,7 @@ public class HashMapUh<K, V>  {
      *
      * @return ArrayList created
      */
+
     public ArrayList getValuesAsArrayList() throws EmptyArrayListException {
         ArrayList<String> items = new ArrayList();
         logger.info("attempting to create ArrayList");
@@ -225,6 +234,7 @@ public class HashMapUh<K, V>  {
      * @param key the key to hash
      * @return int representation of hashed index
      */
+
     private int index(K key) {
         if (key == null) {
             return 0;

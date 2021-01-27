@@ -10,11 +10,17 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class HashMapUhTest<K, V> {
-    /* the hashmap instantiation is tested
-    inherently by instantiation for other tests
-    */
+/**
+ * Test the public methods in the HashMapUh Class
+ * <br>
+ * Key and Value types can be chosen at instantiation however
+ * they must remain consistent.
+ *
+ * @param <K> A key as number or string
+ * @param <V> A value as number or string
+ */
 
+public class HashMapUhTest<K, V> {
     HashMapUh<Integer, String> mapIntStr = new HashMapUh<>(32);
     HashMapUh<String, String> mapStrStr = new HashMapUh<>(32);
 

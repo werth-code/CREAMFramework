@@ -1,41 +1,65 @@
 package com.codedifferently.collections.sortedset;
 
-import com.codedifferently.collections.unsortedset.UnsortedSet;
-import com.codedifferently.collections.unsortedset.NoDataInParameterException;
+import com.codedifferently.collections.Set;
+import com.codedifferently.collections.sortedset.exceptions.DuplicateDataInSetException;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
-public class SortedSet<T> extends UnsortedSet<T> implements Comparable<T> {
+public class SortedSet<T> implements Set<T> {
     Logger logger = Logger.getGlobal();
 
+    private ArrayList<T> setItems;
+    private Integer count;
+
+    public SortedSet() {
+        this.setItems = new ArrayList<>();
+        this.count = 0;
+    }
+
     @Override
-    public Boolean add(T data){
+    public Boolean add(T data) {
         try {
-            if (data == null) throw new NoDataInParameterException();
-            for (Object element : this.getBackingArray()) {
-                if (element == data) return false;
-            }
-            if (this.getCounter() == this.getBackingArray().length) expandArray(data);
+            if (setItems.contains(data)) throw new DuplicateDataInSetException();
             else {
-                //add sort method
-                this.getBackingArray()[this.getCounter()] = data;
-                this.setCounter(this.getCounter() + 1);
+                setItems.add(data);
+                count++;
             }
-
-            //Arrays.sort(this.getBackingArray(), Comparator.nullsLast(Comparator.naturalOrder()));
-            return true;
-
-        } catch (NoDataInParameterException e) {
-            logger.warning("The Data Parameter Must Not Be Empty.");
+        } catch (DuplicateDataInSetException e) {
+            logger.warning(e + " Duplicate Data In Set");
         }
         return false;
     }
 
+    @Override
+    public T get(T data) {
+        return setItems.get(setItems.indexOf(data));
+    }
 
     @Override
-    public int compareTo(T o) {
-        return 0;
+    public Boolean contains(T data) {
+        return setItems.contains(data);
+    }
+
+
+    @Override
+    public Object remove(T data) {
+        count--;
+        return setItems.remove(data);
+    }
+
+    @Override
+    public Integer size() {
+        return count;
+    }
+
+    @Override
+    public void clear() {
+
+    }
+
+    @Override
+    public Boolean isEmpty() {
+        return null;
     }
 }
